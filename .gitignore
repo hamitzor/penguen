@@ -1,0 +1,7 @@
+.vscode/
+*.out
+*.a
+*.o
+*.i
+*.s
+build/
