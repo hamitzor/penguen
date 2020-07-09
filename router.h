@@ -1,7 +1,6 @@
 #ifndef _PENGUEN_ROUTER_H_
 #define _PENGUEN_ROUTER_H_
 
-#include "http.h"
 #include "http_message.h"
 
 struct route_t;

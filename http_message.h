@@ -1,12 +1,10 @@
 #ifndef _PENGUEN_HTTP_MESSAGE_H_
 #define _PENGUEN_HTTP_MESSAGE_H_
 
-#include "http.h"
-
 struct req_t;
 struct res_t;
 
-typedef enum http_version
+typedef enum http_version_t
 {
     HTTP_0_9,
     HTTP_1_0,
@@ -14,7 +12,7 @@ typedef enum http_version
     HTTP_2_0,
     HTTP_3_0,
     http_version_len
-} http_version;
+} http_version_t;
 
 typedef enum http_method_t
 {
@@ -35,69 +33,92 @@ typedef unsigned long long int res_body_len_t;
 
 typedef enum http_status_code_t
 {
-    HTTP_STATUS_100,
-    HTTP_STATUS_101,
-    HTTP_STATUS_102,
-    HTTP_STATUS_200,
-    HTTP_STATUS_201,
-    HTTP_STATUS_202,
-    HTTP_STATUS_203,
-    HTTP_STATUS_204,
-    HTTP_STATUS_205,
-    HTTP_STATUS_206,
-    HTTP_STATUS_207,
-    HTTP_STATUS_208,
-    HTTP_STATUS_226,
-    HTTP_STATUS_300,
-    HTTP_STATUS_301,
-    HTTP_STATUS_302,
-    HTTP_STATUS_303,
-    HTTP_STATUS_304,
-    HTTP_STATUS_305,
-    HTTP_STATUS_307,
-    HTTP_STATUS_308,
-    HTTP_STATUS_400,
-    HTTP_STATUS_401,
-    HTTP_STATUS_402,
-    HTTP_STATUS_403,
-    HTTP_STATUS_404,
-    HTTP_STATUS_405,
-    HTTP_STATUS_406,
-    HTTP_STATUS_407,
-    HTTP_STATUS_408,
-    HTTP_STATUS_409,
-    HTTP_STATUS_410,
-    HTTP_STATUS_411,
-    HTTP_STATUS_412,
-    HTTP_STATUS_413,
-    HTTP_STATUS_414,
-    HTTP_STATUS_415,
-    HTTP_STATUS_416,
-    HTTP_STATUS_417,
-    HTTP_STATUS_418,
-    HTTP_STATUS_421,
-    HTTP_STATUS_422,
-    HTTP_STATUS_423,
-    HTTP_STATUS_424,
-    HTTP_STATUS_426,
-    HTTP_STATUS_428,
-    HTTP_STATUS_429,
-    HTTP_STATUS_431,
-    HTTP_STATUS_444,
-    HTTP_STATUS_451,
-    HTTP_STATUS_499,
-    HTTP_STATUS_500,
-    HTTP_STATUS_501,
-    HTTP_STATUS_502,
-    HTTP_STATUS_503,
-    HTTP_STATUS_504,
-    HTTP_STATUS_505,
-    HTTP_STATUS_506,
-    HTTP_STATUS_507,
-    HTTP_STATUS_508,
-    HTTP_STATUS_510,
-    HTTP_STATUS_511,
-    HTTP_STATUS_599
+    STATUS_100,
+    STATUS_101,
+    STATUS_102,
+    STATUS_103,
+    STATUS_200,
+    STATUS_201,
+    STATUS_202,
+    STATUS_203,
+    STATUS_204,
+    STATUS_205,
+    STATUS_206,
+    STATUS_207,
+    STATUS_208,
+    STATUS_226,
+    STATUS_300,
+    STATUS_301,
+    STATUS_302,
+    STATUS_303,
+    STATUS_304,
+    STATUS_305,
+    STATUS_306,
+    STATUS_307,
+    STATUS_308,
+    STATUS_400,
+    STATUS_401,
+    STATUS_402,
+    STATUS_403,
+    STATUS_404,
+    STATUS_405,
+    STATUS_406,
+    STATUS_407,
+    STATUS_408,
+    STATUS_409,
+    STATUS_410,
+    STATUS_411,
+    STATUS_412,
+    STATUS_413,
+    STATUS_414,
+    STATUS_415,
+    STATUS_416,
+    STATUS_417,
+    STATUS_418,
+    STATUS_420,
+    STATUS_421,
+    STATUS_422,
+    STATUS_423,
+    STATUS_424,
+    STATUS_425,
+    STATUS_426,
+    STATUS_428,
+    STATUS_429,
+    STATUS_431,
+    STATUS_440,
+    STATUS_444,
+    STATUS_449,
+    STATUS_450,
+    STATUS_451,
+    STATUS_494,
+    STATUS_495,
+    STATUS_496,
+    STATUS_497,
+    STATUS_498,
+    STATUS_499,
+    STATUS_500,
+    STATUS_501,
+    STATUS_502,
+    STATUS_503,
+    STATUS_504,
+    STATUS_505,
+    STATUS_506,
+    STATUS_507,
+    STATUS_508,
+    STATUS_509,
+    STATUS_510,
+    STATUS_511,
+    STATUS_520,
+    STATUS_521,
+    STATUS_522,
+    STATUS_523,
+    STATUS_524,
+    STATUS_525,
+    STATUS_526,
+    STATUS_527,
+    STATUS_529,
+    STATUS_530,
+    http_status_code_len
 } http_status_code_t;
 
 typedef enum req_header_field_name_t
@@ -212,7 +233,7 @@ typedef struct req_t
 {
     http_method_t method;
     char *uri;
-    http_version version;
+    http_version_t version;
     req_header_field_t *headers[req_header_field_name_len];
     char *body;
     req_body_len_t body_len;
@@ -220,18 +241,22 @@ typedef struct req_t
 
 typedef struct res_t
 {
-    http_version version;
+    http_version_t version;
     http_status_code_t status;
     res_header_field_t *headers[res_header_field_name_len];
     char *body;
     res_body_len_t body_len;
 } res_t;
 
-int http_parse_request(char *request, req_t *req);
+int parse_http_request(char *request, req_t *req);
+char * generate_http_response(const res_t *res);
+void init_req(req_t *req);
+void init_res(res_t *res);
 
 extern const char *req_header_field_names[req_header_field_name_len];
 extern const char *res_header_field_names[res_header_field_name_len];
-extern const char *http_version_literals[http_version_len];
+extern const char *http_version_expr[http_version_len];
 extern const char *http_methods[http_method_len];
+extern const char *http_status_names[http_status_code_len];
 
 #endif
