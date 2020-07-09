@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static void _create_new_route(route_t **route, uri_t uri, handler_t handler)
+static void _create_new_route(route_t **route, char *uri, handler_t handler)
 {
     *route = (route_t *)malloc(sizeof(route_t));
     (*route)->uri = uri;
@@ -11,7 +11,7 @@ static void _create_new_route(route_t **route, uri_t uri, handler_t handler)
     (*route)->_next = NULL;
 }
 
-void router_add_route(route_t **root_route, uri_t uri, handler_t handler)
+void router_add_route(route_t **root_route, char *uri, handler_t handler)
 {
     if (*root_route == NULL)
         _create_new_route(root_route, uri, handler);
@@ -23,7 +23,7 @@ void router_add_route(route_t **root_route, uri_t uri, handler_t handler)
     }
 }
 
-route_t * router_get_route(route_t *root_route, uri_t uri)
+route_t *router_get_route(route_t *root_route, char *uri)
 {
     while (root_route != NULL)
     {
