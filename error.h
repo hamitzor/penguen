@@ -3,8 +3,10 @@
 
 typedef enum
 {
-    PENGUEN_NO_ERROR,
-    PENGUEN_BAD_REQUEST,
+    PGN_NO_ERROR,
+    PGN_BAD_REQUEST,
+    PGN_CANNOT_CREATE_SERVER,
+    PGN_BAD_IP_ADDRESS,
     pgn_error_len
 } pgn_error_t;
 

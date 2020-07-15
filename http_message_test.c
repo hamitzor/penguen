@@ -19,8 +19,8 @@ int main()
     if (uri == NULL)
     {
         pgn_print_error();
-        return -1;
+        return EXIT_FAILURE;
     }
     printf("%s\n", uri);
-    return 0;
+    return EXIT_SUCCESS;
 }

@@ -7,7 +7,7 @@
 
 typedef struct
 {
-    char *host;
+    char *addr;
     int port;
     int flags;
     char *base;

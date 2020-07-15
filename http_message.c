@@ -18,7 +18,7 @@ char *pgn_parse_http_request(char *request)
 
     if (p == NULL)
     {
-        pgn_errorno = PENGUEN_BAD_REQUEST;
+        pgn_errorno = PGN_BAD_REQUEST;
         return NULL;
     }
 
@@ -28,7 +28,7 @@ char *pgn_parse_http_request(char *request)
 
     if (strcmp(request, "GET") != 0)
     {
-        pgn_errorno = PENGUEN_BAD_REQUEST;
+        pgn_errorno = PGN_BAD_REQUEST;
         return NULL;
     }
     request = p + 1;
@@ -46,7 +46,7 @@ char *pgn_parse_http_request(char *request)
         if (strcmp(request, pgn_http_version_expr[i]) == 0)
             return uri;
 
-    pgn_errorno = PENGUEN_BAD_REQUEST;
+    pgn_errorno = PGN_BAD_REQUEST;
     return NULL;
 }
 
