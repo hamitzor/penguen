@@ -1,27 +1,27 @@
 #include <stdio.h>
 #include "router.h"
 
-void route_index(req_t *req, res_t *res)
+void route_index(char *uri, pgn_res_t *res)
 {
-    fprintf(stderr, "[%s REQUEST] %s\n", req->method == GET_METHOD ? "GET" : "POST", req->uri);
+    fprintf(stderr, "[%s REQUEST] %s\n", "GET", uri);
 }
 
-void route_hello(req_t *req, res_t *res)
+void route_hello(char *uri, pgn_res_t *res)
 {
-    fprintf(stderr, "[%s REQUEST] %s\n", req->method == GET_METHOD ? "GET" : "POST", req->uri);
+    fprintf(stderr, "[%s REQUEST] %s\n", "GET", uri);
 }
 
 int main()
 {
-    route_t *root_router = NULL;
-    router_add_route(&root_router, "/", &route_index);
-    router_add_route(&root_router, "/hello", &route_hello);
+    pgn_route_t *root_router = NULL;
+    pgn_router_add_route(&root_router, "/", "public/index.html", &route_index);
+    pgn_router_add_route(&root_router, "/hello", "public/hello.html", &route_hello);
 
-    req_t index_request = {GET_METHOD, "/"};
-    req_t hello_request = {GET_METHOD, "/hello"};
+    char *index_request = "/";
+    char *hello_request = "/hello";
 
-    router_get_route(root_router, index_request.uri)->handler(&index_request, NULL);
-    router_get_route(root_router, hello_request.uri)->handler(&hello_request, NULL);
+    pgn_router_get_route(root_router, index_request)->handler(index_request, NULL);
+    pgn_router_get_route(root_router, hello_request)->handler(hello_request, NULL);
 
-    router_clear(&root_router);
+    pgn_router_clear(&root_router);
 }

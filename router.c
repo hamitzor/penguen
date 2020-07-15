@@ -3,27 +3,28 @@
 #include <stdlib.h>
 #include <string.h>
 
-static void _create_new_route(route_t **route, char *uri, handler_t handler)
+static void _create_new_route(pgn_route_t **route, char *uri, char *file, handler_t handler)
 {
-    *route = (route_t *)malloc(sizeof(route_t));
+    *route = (pgn_route_t *)malloc(sizeof(pgn_route_t));
     (*route)->uri = uri;
+    (*route)->file = file;
     (*route)->handler = handler;
     (*route)->_next = NULL;
 }
 
-void router_add_route(route_t **root_route, char *uri, handler_t handler)
+void pgn_router_add_route(pgn_route_t **root_route, char *uri, char *file, handler_t handler)
 {
     if (*root_route == NULL)
-        _create_new_route(root_route, uri, handler);
+        _create_new_route(root_route, uri, file, handler);
     else
     {
         while ((*root_route)->_next != NULL)
             (*root_route)->_next = (*root_route)->_next->_next;
-        _create_new_route(&((*root_route)->_next), uri, handler);
+        _create_new_route(&((*root_route)->_next), uri, file, handler);
     }
 }
 
-route_t *router_get_route(route_t *root_route, char *uri)
+pgn_route_t *pgn_router_get_route(pgn_route_t *root_route, char *uri)
 {
     while (root_route != NULL)
     {
@@ -34,9 +35,9 @@ route_t *router_get_route(route_t *root_route, char *uri)
     return NULL;
 }
 
-void router_clear(route_t **root_route)
+void pgn_router_clear(pgn_route_t **root_route)
 {
-    route_t *temp;
+    pgn_route_t *temp;
     while (*root_route != NULL)
     {
         temp = (*root_route)->_next;

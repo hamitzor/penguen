@@ -3,19 +3,18 @@
 
 #include "http_message.h"
 
-struct route_t;
+typedef void (*handler_t)(char *uri, pgn_res_t *res);
 
-typedef void (*handler_t)(struct req_t *req, struct res_t *res);
-
-typedef struct route_t
+typedef struct pgn_route_t
 {
     char *uri;
+    char *file;
     handler_t handler;
-    struct route_t *_next;
-} route_t;
+    struct pgn_route_t *_next;
+} pgn_route_t;
 
-void router_add_route(route_t **root_route, char *uri, handler_t handler);
-route_t *router_get_route(route_t *root_route, char *uri);
-void router_clear(route_t **root_route);
+void pgn_router_add_route(pgn_route_t **root_route, char *uri, char *file, handler_t handler);
+pgn_route_t *pgn_router_get_route(pgn_route_t *root_route, char *uri);
+void pgn_router_clear(pgn_route_t **root_route);
 
 #endif

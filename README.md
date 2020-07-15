@@ -1,6 +1,6 @@
 # Penguen Server
 
-Penguen (penguin in Turkish) is a small http server written in C, which can be used to host very simple sites with very basic configuration.
+Penguen (penguin in Turkish) is a small http server written in C, which can be used to host very simple static web sites with very basic configuration.
 
 For Linux only.
 
