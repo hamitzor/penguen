@@ -6,6 +6,6 @@ For Linux only.
 
 The aim of this project to come up with a server that:
 
-- is a very fast
+- is very fast
 - lets user specify some basic configurations for the server instance
 - has a very low overhead
