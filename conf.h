@@ -15,4 +15,6 @@ typedef struct
     pgn_route_t *routes;
 } pgn_conf_t;
 
+void pgn_conf_free(pgn_conf_t *pgn_conf);
+
 #endif

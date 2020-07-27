@@ -23,5 +23,5 @@ int main()
     pgn_router_get_route(root_router, index_request)->handler(index_request, NULL);
     pgn_router_get_route(root_router, hello_request)->handler(hello_request, NULL);
 
-    pgn_router_clear(&root_router);
+    pgn_router_free(&root_router);
 }

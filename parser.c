@@ -1324,7 +1324,7 @@ yyreduce:
     {
   case 11:
 #line 35 "parser.y"
-                       { pgn_conf.host = (yyvsp[0].text); }
+                       { pgn_conf.addr = (yyvsp[0].text); }
 #line 1329 "parser.c"
     break;
 

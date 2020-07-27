@@ -15,6 +15,6 @@ typedef struct pgn_route_t
 
 void pgn_router_add_route(pgn_route_t **root_route, char *uri, char *file, handler_t handler);
 pgn_route_t *pgn_router_get_route(pgn_route_t *root_route, char *uri);
-void pgn_router_clear(pgn_route_t **root_route);
+void pgn_router_free(pgn_route_t **root_route);
 
 #endif

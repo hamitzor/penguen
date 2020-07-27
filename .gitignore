@@ -6,5 +6,3 @@
 *.s
 build/
 conf.penguen
-run_parser.sh
-parser_test.c

@@ -32,7 +32,7 @@ void yyerror(const char *s) { fprintf(stderr,"Error in line %d: %s\n", yylineno,
 conf    : stmts ;
 stmts   : stmt | stmts stmt ;
 stmt    : host | port | enable_gzip | base | static | route ;
-host    : T_HOST value { pgn_conf.host = $2; } ;
+host    : T_HOST value { pgn_conf.addr = $2; } ;
 port    : T_PORT value { pgn_conf.port = atoi($2); } ;
 enable_gzip : T_ENABLE_GZIP value { pgn_conf.flags |= (strcmp($2, "on") == 0 ? PGN_ENABLE_GZIP : 0); } ;
 base    : T_BASE value { pgn_conf.base = $2; } ;

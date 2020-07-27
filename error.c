@@ -8,12 +8,11 @@ char *pgn_error_messages[pgn_error_len] = {
     "No errors.",
     "Bad request.",
     "Cannot create http server.",
-    "Bad IP address."
-};
+    "Bad IP address."};
 
 void pgn_print_error()
 {
-    fprintf(stderr, "[PENGUEN]: %s", pgn_error_messages[pgn_errorno]);
+    fprintf(stderr, "[PENGUEN]: %s\n", pgn_error_messages[pgn_errorno]);
     if (errno != 0)
         perror("");
 }

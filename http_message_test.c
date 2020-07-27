@@ -7,8 +7,8 @@
 int main()
 {
     pgn_res_t res;
-    res.body = "{ \"value\": 5 }";
-    res.body_len = strlen(res.body);
+    const char *body = "{ \"value\": 5 }";
+    res.body_len = strlen(body);
     res.status = STATUS_407;
 
     fprintf(stderr, "%s\n", pgn_generate_http_response(&res));

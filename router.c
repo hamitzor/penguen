@@ -35,12 +35,14 @@ pgn_route_t *pgn_router_get_route(pgn_route_t *root_route, char *uri)
     return NULL;
 }
 
-void pgn_router_clear(pgn_route_t **root_route)
+void pgn_router_free(pgn_route_t **root_route)
 {
     pgn_route_t *temp;
     while (*root_route != NULL)
     {
         temp = (*root_route)->_next;
+        free((*root_route)->uri);
+        free((*root_route)->file);
         free(*root_route);
         *root_route = temp;
     }

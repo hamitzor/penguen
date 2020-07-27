@@ -8,7 +8,6 @@ typedef enum { STATUS_100, STATUS_101, STATUS_102, STATUS_103, STATUS_200, STATU
 typedef struct
 {
     pgn_http_status_code_t status;
-    char *body;
     pgn_res_body_len_t body_len;
 } pgn_res_t;
 

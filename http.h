@@ -12,5 +12,6 @@ typedef struct
 pgn_http_server_t *pgn_http_create_server(pgn_conf_t *conf);
 int pgn_http_listen(pgn_http_server_t *server);
 int pgn_http_free(pgn_http_server_t *server);
+int write_file_to_socket(int sockfd, FILE *file);
 
 #endif
