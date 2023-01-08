@@ -8,13 +8,13 @@ typedef void (*handler_t)(char *uri, pgn_res_t *res);
 typedef struct pgn_route_t
 {
     char *uri;
-    char *file;
+    char *file_path;
     handler_t handler;
     struct pgn_route_t *_next;
 } pgn_route_t;
 
-void pgn_router_add_route(pgn_route_t **root_route, char *uri, char *file, handler_t handler);
+void pgn_router_add_route(pgn_route_t **root_route, char *uri, char *file_path, handler_t handler);
 pgn_route_t *pgn_router_get_route(pgn_route_t *root_route, char *uri);
-void pgn_router_free(pgn_route_t **root_route);
+void pgn_router_free(pgn_route_t *root_route);
 
 #endif

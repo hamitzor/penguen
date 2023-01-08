@@ -6,7 +6,6 @@
 #include "lexer.h"
 #include "error.h"
 
-extern pgn_conf_t pgn_conf;
 int pgn_be_verbose = 0;
 
 int main(int argc, char **argv)
@@ -27,6 +26,7 @@ int main(int argc, char **argv)
     pgn_conf.port = 80;
     pgn_conf.flags = 0;
     pgn_conf.routes = NULL;
+    pgn_conf.static_dir = NULL;
 
     yyparse();
     fclose(yyin);
@@ -39,7 +39,7 @@ int main(int argc, char **argv)
         exit(EXIT_FAILURE);
     }
 
-    fprintf(stderr, "Server listening at http://%s:%d.\n", pgn_conf.addr, pgn_conf.port);
+    fprintf(stderr, "Penguen listens for requests at http://%s:%d\n", pgn_conf.addr, pgn_conf.port);
     rc = pgn_http_listen(server);
 
     if (rc != 0)

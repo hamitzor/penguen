@@ -6,9 +6,7 @@
 #include "conf.h"
 #include "router.h"
 
-pgn_conf_t pgn_conf;
-
-void yyerror(const char *s) { fprintf(stderr,"Error in line %d: %s\n", yylineno,s); exit(EXIT_FAILURE); }
+void yyerror(const char *s) { fprintf(stderr,"Error in the configuration file: %s in line %d\n", s, yylineno); exit(EXIT_FAILURE); }
 %}
 
 %union{

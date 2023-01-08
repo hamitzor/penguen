@@ -9,7 +9,6 @@ const char *pgn_http_status_names[http_status_code_len] = {"100 Continue", "101 
 
 char *pgn_parse_http_request(char *request)
 {
-    int string_index;
     char *crlf = "\r\n";
     char *sp = " ";
     char *uri;
@@ -53,7 +52,6 @@ char *pgn_parse_http_request(char *request)
 char *pgn_generate_http_response(const pgn_res_t *res)
 {
     char *crlf = "\r\n";
-    char *header_name_value_seperator = ": ";
     unsigned long long int len = 14;
 
     len += strlen(pgn_http_status_names[res->status]);

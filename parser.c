@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.5.  */
+/* A Bison parser, made by GNU Bison 3.5.1.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2019 Free Software Foundation,
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
    Inc.
 
    This program is free software: you can redistribute it and/or modify
@@ -48,7 +48,7 @@
 #define YYBISON 1
 
 /* Bison version.  */
-#define YYBISON_VERSION "3.5"
+#define YYBISON_VERSION "3.5.1"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -75,11 +75,9 @@
 #include "conf.h"
 #include "router.h"
 
-pgn_conf_t pgn_conf;
+void yyerror(const char *s) { fprintf(stderr,"Error in the configuration file: %s in line %d\n", s, yylineno); exit(EXIT_FAILURE); }
 
-void yyerror(const char *s) { fprintf(stderr,"Error in line %d: %s\n", yylineno,s); exit(EXIT_FAILURE); }
-
-#line 83 "parser.c"
+#line 81 "parser.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -141,11 +139,11 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 14 "parser.y"
+#line 12 "parser.y"
 
     char *text;
 
-#line 149 "parser.c"
+#line 147 "parser.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -521,8 +519,8 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    32,    32,    33,    33,    34,    34,    34,    34,    34,
-      34,    35,    36,    37,    38,    39,    40,    41
+       0,    30,    30,    31,    31,    32,    32,    32,    32,    32,
+      32,    33,    34,    35,    36,    37,    38,    39
 };
 #endif
 
@@ -774,7 +772,7 @@ yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp, int yyrule)
     {
       YYFPRINTF (stderr, "   $%d = ", yyi + 1);
       yy_symbol_print (stderr,
-                       yystos[yyssp[yyi + 1 - yynrhs]],
+                       yystos[+yyssp[yyi + 1 - yynrhs]],
                        &yyvsp[(yyi + 1) - (yynrhs)]
                                               );
       YYFPRINTF (stderr, "\n");
@@ -952,7 +950,7 @@ yysyntax_error (YYPTRDIFF_T *yymsg_alloc, char **yymsg,
   */
   if (yytoken != YYEMPTY)
     {
-      int yyn = yypact[*yyssp];
+      int yyn = yypact[+*yyssp];
       YYPTRDIFF_T yysize0 = yytnamerr (YY_NULLPTR, yytname[yytoken]);
       yysize = yysize0;
       yyarg[yycount++] = yytname[yytoken];
@@ -1323,49 +1321,49 @@ yyreduce:
   switch (yyn)
     {
   case 11:
-#line 35 "parser.y"
+#line 33 "parser.y"
                        { pgn_conf.addr = (yyvsp[0].text); }
-#line 1329 "parser.c"
+#line 1327 "parser.c"
     break;
 
   case 12:
-#line 36 "parser.y"
+#line 34 "parser.y"
                        { pgn_conf.port = atoi((yyvsp[0].text)); }
-#line 1335 "parser.c"
+#line 1333 "parser.c"
     break;
 
   case 13:
-#line 37 "parser.y"
+#line 35 "parser.y"
                                   { pgn_conf.flags |= (strcmp((yyvsp[0].text), "on") == 0 ? PGN_ENABLE_GZIP : 0); }
-#line 1341 "parser.c"
+#line 1339 "parser.c"
     break;
 
   case 14:
-#line 38 "parser.y"
+#line 36 "parser.y"
                        { pgn_conf.base = (yyvsp[0].text); }
-#line 1347 "parser.c"
+#line 1345 "parser.c"
     break;
 
   case 15:
-#line 39 "parser.y"
+#line 37 "parser.y"
                          { pgn_conf.static_dir = (yyvsp[0].text); }
-#line 1353 "parser.c"
+#line 1351 "parser.c"
     break;
 
   case 16:
-#line 40 "parser.y"
+#line 38 "parser.y"
                               { pgn_router_add_route(&(pgn_conf.routes), (yyvsp[-1].text), (yyvsp[0].text), NULL); }
-#line 1359 "parser.c"
+#line 1357 "parser.c"
     break;
 
   case 17:
-#line 41 "parser.y"
+#line 39 "parser.y"
                 { (yyval.text) = (char *)malloc((strlen(yytext) - 2) * sizeof(char)); strncpy((yyval.text), yytext + 1, strlen(yytext) - 2); }
-#line 1365 "parser.c"
+#line 1363 "parser.c"
     break;
 
 
-#line 1369 "parser.c"
+#line 1367 "parser.c"
 
       default: break;
     }
@@ -1584,7 +1582,7 @@ yyreturn:
   while (yyssp != yyss)
     {
       yydestruct ("Cleanup: popping",
-                  yystos[*yyssp], yyvsp);
+                  yystos[+*yyssp], yyvsp);
       YYPOPSTACK (1);
     }
 #ifndef yyoverflow
@@ -1597,4 +1595,5 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 43 "parser.y"
+#line 41 "parser.y"
+

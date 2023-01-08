@@ -14,7 +14,7 @@
 "@base"                 { return T_BASE; }
 "@static"               { return T_STATIC; }
 "@route"                { return T_ROUTE; }
-"\"".*"\""              { return T_VAL; }
+\"[^\"]+\"              { return T_VAL; }
 
 %%
 

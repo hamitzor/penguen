@@ -17,4 +17,6 @@ typedef struct
 
 void pgn_conf_free(pgn_conf_t *pgn_conf);
 
+pgn_conf_t pgn_conf;
+
 #endif

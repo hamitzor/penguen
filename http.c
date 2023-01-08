@@ -178,7 +178,7 @@ int pgn_http_listen(pgn_http_server_t *server)
             fprintf(stdout, "\tGET %s Host: %s Port: %d\n", request_uri, IP, client_addr.sin_port);
         }
 
-        if (strstr(request_uri + 1, server->conf->static_dir) == request_uri + 1)
+        if (strlen(request_uri) > 1 && server->conf->static_dir != NULL && strstr(request_uri + 1, server->conf->static_dir) != NULL)
         {
             char *static_file_name = (char *)malloc(sizeof(char) * (strlen(server->conf->base) + strlen(request_uri) + 1));
             *static_file_name = '\0';
@@ -200,18 +200,18 @@ int pgn_http_listen(pgn_http_server_t *server)
             if (router != NULL)
             {
                 pgn_res_t res;
-                char *html_file_name = (char *)malloc(sizeof(char) * (strlen(server->conf->base) + strlen(router->file) + 2));
+                char *html_file_name = (char *)malloc(sizeof(char) * (strlen(server->conf->base) + strlen(router->file_path) + 2));
                 *html_file_name = '\0';
                 strcat(html_file_name, server->conf->base);
                 strcat(html_file_name, "/");
-                strcat(html_file_name, router->file);
+                strcat(html_file_name, router->file_path);
                 FILE *html_file = fopen(html_file_name, "r");
                 fseek(html_file, 0, SEEK_END);
                 res.body_len = ftell(html_file);
                 fseek(html_file, 0, SEEK_SET);
                 res.status = STATUS_200;
                 char *response = pgn_generate_http_response(&res); //@TODO: MIME types should be added.
-                write(connfd, response, strlen(response)); //@TODO: error checking.
+                write(connfd, response, strlen(response));         //@TODO: error checking.
                 write_file_to_socket(connfd, html_file);
                 free(response);
                 fclose(html_file);
@@ -222,6 +222,11 @@ int pgn_http_listen(pgn_http_server_t *server)
                 PGN_DEBUG_INFO(fprintf(stdout, "[DEBUG]\t"));
                 PGN_DEBUG_INFO(pgn_log_now());
                 PGN_DEBUG_INFO(fprintf(stdout, "\tUndefined route is been tried to be accessed: %s\n", request_uri));
+                pgn_res_t res;
+                res.status = STATUS_404;
+                res.body_len = 0;
+                char *response = pgn_generate_http_response(&res);
+                write(connfd, response, strlen(response));
             }
         }
 
